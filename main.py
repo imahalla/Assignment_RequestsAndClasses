@@ -16,22 +16,25 @@ class MyUser:
 
 
 # -----2-----
-full_name = input('Enter your name: ')
-res = requests.get(f'https://jsonplaceholder.typicode.com/users/')
-users = res.json()
-counter = 0
-for user in users:
-    counter += 1
-    if user["name"] == full_name:
-        counter -= 1
+def get_user(users, full_name):
+    for user in users:
         id = user["id"]
         name = user["name"]
         username = user["username"]
         email = user["email"]
         my_user = MyUser(id, name, username, email)
-        print(f'The user was found: {my_user}')
-    if counter == 10:
-        print(f'User "{full_name}" is not found')
+        if my_user.name == full_name:
+            return my_user
+    return None
 
 
+full_name = input('Enter your name: ')
+res = requests.get(f'https://jsonplaceholder.typicode.com/users/')
+users = res.json()
+my_user = get_user(users, full_name)
+
+if my_user:
+    print(f'The user was found: {my_user}')
+else:
+    print(f'User "{full_name}" is not found')
 
