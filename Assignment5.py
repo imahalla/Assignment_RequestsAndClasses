@@ -1,4 +1,5 @@
-# ---Assignment 5 ---
+# ---Assignment 5
+
 import requests
 
 URL = 'https://randomuser.me/api/'
@@ -10,11 +11,8 @@ def extract_first_name():
     return first_name
 
 
-number = 1
-
-
 def check_input_and_print_results(number):
-    if number > 0:
+    if 0 < number <= 100:
         for i in range(number):
             name = extract_first_name()
             print(name)
@@ -24,7 +22,7 @@ def check_input_and_print_results(number):
         print("invalid entry, enter number greater then 0!!!")
 
 
+number = 1
 while number != -1:
     number = int(input('Enter number between 1 - 100, to quit enter -1 :'))
     check_input_and_print_results(number)
-
